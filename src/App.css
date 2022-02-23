@@ -4,7 +4,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   position: relative;
-
+ margin-bottom: 20px !important;
   
 }
 
@@ -14,4 +14,7 @@
   right: 15px;
   border-radius: 50%;
  
+}
+.color{
+  color: blue;
 }
