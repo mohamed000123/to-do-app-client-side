@@ -6,7 +6,5 @@ export const Input = ({holder, setValue})=>{
         <input  className="form-control"  type="text" placeholder= {holder}
             onChange={handleChange}
           />
-
       );
-    
 }

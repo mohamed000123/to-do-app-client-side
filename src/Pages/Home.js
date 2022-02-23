@@ -26,21 +26,8 @@ let state = useSelector((state)=>state)
          (GetTasks())
        );
      }}>All Tasks</button>
-     <div className=' d-flex  justify-content-center'>
-      <input  className="form-control w-75"  type="text" placeholder="search....."
-      onChange={(event) => { setSearch(event.target.value);  }} 
-       />
-       <button  className="btn btn-primary"          
-       onClick={() => {
-        dispatch(
-          SearchTasks({
-            word:search
-          })
-        );
-      }}>Search</button>
-      </div>
       <InputForm setTitle={setTitle} setDescription={setDescription}  AddTask={AddTask}  
-      dispatch={dispatch} state={state} title={title} description={description} />
+      dispatch={dispatch} state={state} title={title} description={description}  setSearch={setSearch} search={search} SearchTasks={SearchTasks}/>
   
     <div  className=' col-md-6 col-sm-12  pt-4 m-auto  '>
     
@@ -49,15 +36,17 @@ let state = useSelector((state)=>state)
        <div  className="displayTasks col-md-6 col-sm-12   p-5  m-auto " key={index}>
           <h4><span className='color'>title:</span> {task.title}</h4>
          <h5><span className='color'>description: </span> {task.description}</h5>
+         <form>
          <Input  setValue={setupdateTitle} holder="Title....." />
          <Input  setValue={setupdateDescription} holder="Description....." />
-       <button className='bg-success'
+       <button className='bg-success' type='reset'
          onClick={(e) => {
            dispatch( EditTask({  id: task.id, title: updateTitle, description:updateDescription  })   );
          }}
        >
          Update 
        </button>
+       </form>
        <button className='delete bg-danger'
        onClick={() => {
          dispatch(DeleteTask(task.id));
