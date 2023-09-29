@@ -1,29 +1,35 @@
 import {
-  Add_task,
-  Delete_task,
   Search_tasks,
-  Edit_task,
   Get_tasks,
 } from "./actionsTypes";
 
 // Create Actions Creators
+export function GetTasks() {
+  return async (dispatch) => {
+    try {
+      const call = await fetch("http://localhost:3000");
+      const data = await call.json();
+      dispatch({
+        type: Get_tasks,
+        payload: data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
 
 export function AddTask(data) {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     try {
-      console.log(JSON.stringify(data));
-      const call = await fetch(`http://localhost:3000`, {
+        await fetch(`http://localhost:3000`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const response = await call.json();
-      dispatch({
-        type: Add_task,
-        payload: response,
-      });
+      dispatch(GetTasks());
     } catch (err) {
       console.log(err);
     }
@@ -36,19 +42,14 @@ export function EditTask(data) {
       const title = data.title;
       const description = data.description;
       const update = { title, description };
-      const call = await fetch(`http://localhost:3000/${data.id}`, {
+      await fetch(`http://localhost:3000/${data.id}`, {
         method: "PUT",
         body: JSON.stringify(update),
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const response = await call.json();
-      console.log(response);
-      dispatch({
-        type: Edit_task,
-        payload: response.tasks,
-      });
+      dispatch(GetTasks());
     } catch (err) {
       console.log(err);
     }
@@ -56,19 +57,15 @@ export function EditTask(data) {
 }
 
 export function DeleteTask(id) {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     try {
-      const call = await fetch(`http://localhost:3000/${id} `, {
+      await fetch(`http://localhost:3000/${id} `, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const data = await call.json();
-      dispatch({
-        type: Delete_task,
-        payload: data.tasks,
-      });
+      dispatch(GetTasks());
     } catch (err) {
       console.log(err);
     }
@@ -83,21 +80,6 @@ export function SearchTasks(word) {
       dispatch({
         type: Search_tasks,
         payload: data ? data : getState,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-}
-
-export function GetTasks() {
-  return async (dispatch, getState) => {
-    try {
-      const call = await fetch("http://localhost:3000");
-      const data = await call.json();
-      dispatch({
-        type: Get_tasks,
-        payload: data,
       });
     } catch (err) {
       console.log(err);

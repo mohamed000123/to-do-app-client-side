@@ -1,16 +1,20 @@
 import { Input } from "./Input";
-export const InputForm = ({
+import { useSelector, useDispatch } from "react-redux";
+import {
+  AddTask,
+  SearchTasks,
+} from "../Redux/action_creators";
+export const Form = ({
   setTitle,
   setDescription,
-  dispatch,
-  AddTask,
-  state,
+
   title,
   description,
   setSearch,
   search,
-  SearchTasks,
 }) => {
+  let state = useSelector((state) => state);
+  const dispatch = useDispatch();
   return (
     <form>
       <div className=" d-flex  justify-content-center m-auto">
