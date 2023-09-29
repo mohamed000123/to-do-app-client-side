@@ -1,20 +1,19 @@
-.displayTasks {
-  height:auto;
+.task {
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   position: relative;
- margin-bottom: 20px !important;
-  
+  margin-bottom: 20px !important;
 }
 
-.delete{
+.delete {
   position: absolute;
   top: 15px;
   right: 15px;
   border-radius: 50%;
- 
+  color: white;
+  border: none;
 }
-.color{
+.color {
   color: blue;
 }
