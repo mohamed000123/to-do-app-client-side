@@ -7,7 +7,7 @@ import {
 export function GetTasks() {
   return async (dispatch) => {
     try {
-      const call = await fetch("http://localhost:3000");
+      const call = await fetch("http://localhost:8000");
       const data = await call.json();
       dispatch({
         type: Get_tasks,
@@ -22,7 +22,7 @@ export function GetTasks() {
 export function AddTask(data) {
   return async (dispatch) => {
     try {
-        await fetch(`http://localhost:3000`, {
+        await fetch(`http://localhost:8000`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -42,7 +42,7 @@ export function EditTask(data) {
       const title = data.title;
       const description = data.description;
       const update = { title, description };
-      await fetch(`http://localhost:3000/${data.id}`, {
+      await fetch(`http://localhost:8000/${data.id}`, {
         method: "PUT",
         body: JSON.stringify(update),
         headers: {
@@ -59,7 +59,7 @@ export function EditTask(data) {
 export function DeleteTask(id) {
   return async (dispatch) => {
     try {
-      await fetch(`http://localhost:3000/${id} `, {
+      await fetch(`http://localhost:8000/${id} `, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -72,10 +72,10 @@ export function DeleteTask(id) {
   };
 }
 
-export function SearchTasks(word) {
+export function SearchTasks({word}) {
   return async (dispatch, getState) => {
     try {
-      const call = await fetch(`http://localhost:3000/${word.word}`);
+      const call = await fetch(`http://localhost:8000/${word}`);
       const data = await call.json();
       dispatch({
         type: Search_tasks,
