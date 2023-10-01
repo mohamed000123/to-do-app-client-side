@@ -1,16 +1,12 @@
 import { Input } from "./Input";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  AddTask,
-  SearchTasks,
-} from "../Redux/action_creators";
+import { AddTask, SearchTasks } from "../Redux/action_creators";
 export const Form = ({
   setTitle,
   setDescription,
-
   title,
   description,
-  setSearch,
+  // setSearch,
   search,
 }) => {
   let state = useSelector((state) => state);
@@ -23,19 +19,25 @@ export const Form = ({
           type="text"
           placeholder="search....."
           onChange={(event) => {
-            setSearch(event.target.value);
+            // setSearch(event.target.value);
+            dispatch(
+              SearchTasks({
+                word: event.target.value,
+              })
+            );
           }}
         />
         <button
           className="btn btn-primary"
           type="reset"
-          onClick={() => {
-            dispatch(
-              SearchTasks({
-                word: search,
-              })
-            );
-          }}
+          // onClick={() => {
+          //   dispatch(
+          //     SearchTasks({
+          //       word: search,
+          //     })
+          //   );
+          // }}
+          disabled
         >
           Search
         </button>
